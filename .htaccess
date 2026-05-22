@@ -2,14 +2,9 @@
     RewriteEngine On
     RewriteBase /medical/
 
-    # If the request is for a file or directory, stop here
-    RewriteCond %{REQUEST_FILENAME} -f
-    RewriteRule ^ - [L]
-
-    RewriteCond %{REQUEST_FILENAME} -d
-    RewriteRule ^ - [L]
-
-    # Route everything else to public/index.php
-    RewriteRule ^(.*)$ public/index.php [QSA,L]
+    # Rewrite to public folder if not a real file or folder
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
 
