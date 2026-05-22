@@ -2,12 +2,11 @@
     RewriteEngine On
     RewriteBase /medical/
 
-    # If the request is for a valid file or directory in public folder, allow it
-    RewriteCond %{REQUEST_FILENAME} -f [OR]
-    RewriteCond %{REQUEST_FILENAME} -d
-    RewriteRule ^.*$ - [L]
-
-    # Everything else goes to public/index.php
-    RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L]
+    # Don't rewrite if it's a real file
+    RewriteCond %{REQUEST_FILENAME} !-f
+    # Don't rewrite if it's a real directory
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # Rewrite everything else to public folder
+    RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
 
