@@ -6,8 +6,8 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     # Don't rewrite if it's a real directory
     RewriteCond %{REQUEST_FILENAME} !-d
-    # Don't rewrite if already in public folder
-    RewriteCond %{REQUEST_URI} !^/medical/public/
+    # Don't rewrite if already in public folder (relative to RewriteBase)
+    RewriteCond %{REQUEST_URI} !^public/
     # Rewrite everything else to public folder
     RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
