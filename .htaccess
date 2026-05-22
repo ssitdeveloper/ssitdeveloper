@@ -2,13 +2,15 @@
     RewriteEngine On
     RewriteBase /medical/
 
-    # Don't rewrite if request is for actual file
+    # Skip if already rewritten (prevent infinite loop)
+    RewriteCond %{ENV:REWRITE_DONE} ^$
+    # Don't rewrite actual files
     RewriteCond %{REQUEST_FILENAME} !-f
-    # Don't rewrite if request is for actual directory
+    # Don't rewrite actual directories
     RewriteCond %{REQUEST_FILENAME} !-d
-    # Don't rewrite if already in public folder
-    RewriteCond %{REQUEST_URI} !^/medical/public/
-    # Internally rewrite to public folder (no redirect, so URL stays clean)
-    RewriteRule ^(.*)$ public/$1 [L]
+    # Don't rewrite if already pointing to public
+    RewriteCond %{REQUEST_FILENAME} !^.*/public/
+    # Rewrite to public folder
+    RewriteRule ^(.*)$ public/$1 [L,E=REWRITE_DONE:1]
 </IfModule>
 
