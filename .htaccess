@@ -2,9 +2,11 @@
     RewriteEngine On
     RewriteBase /medical/
 
+    # If the request is not a real file or directory
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} !^/medical/public/
-    RewriteRule ^(.*)$ public/$1 [QSA,L]
+
+    # Route everything to public/index.php
+    RewriteRule ^(.*)$ public/index.php [QSA,L]
 </IfModule>
 
