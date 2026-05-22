@@ -2,13 +2,14 @@
     RewriteEngine On
     RewriteBase /medical/
 
-    # Don't rewrite if it's a real file
-    RewriteCond %{REQUEST_FILENAME} !-f
-    # Don't rewrite if it's a real directory
-    RewriteCond %{REQUEST_FILENAME} !-d
-    # Don't rewrite if already in public folder (relative to RewriteBase)
-    RewriteCond %{REQUEST_URI} !^public/
-    # Rewrite everything else to public folder
-    RewriteRule ^(.*)$ public/$1 [L]
+    # If the request is for a file or directory, stop here
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Route everything else to public/index.php
+    RewriteRule ^(.*)$ public/index.php [QSA,L]
 </IfModule>
 
