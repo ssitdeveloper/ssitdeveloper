@@ -2,14 +2,15 @@
     RewriteEngine On
     RewriteBase /medical/
 
-    # Exclude public directory from rewriting
+    # If the request is for a valid directory
+    RewriteCond %{REQUEST_FILENAME} -d [OR]
+    # If the request is for a valid file
+    RewriteCond %{REQUEST_FILENAME} -f
+    # Don't do anything
+    RewriteRule ^ - [L]
+
+    # If it's not public folder, rewrite to public
     RewriteCond %{REQUEST_URI} !^/medical/public/
-
-    # If request is not for an existing file or directory
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-
-    # Rewrite to public folder
     RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
 
