@@ -2,15 +2,12 @@
     RewriteEngine On
     RewriteBase /medical/
 
-    # Skip if it's a real file
-    RewriteCond %{REQUEST_FILENAME} -f
-    RewriteRule ^ - [L]
-
-    # Skip if it's a real directory
-    RewriteCond %{REQUEST_FILENAME} -d
-    RewriteRule ^ - [L]
-
-    # Rewrite everything else to public folder
-    RewriteRule ^(.*)$ public/$1 [L]
+    # Prevent infinite rewriting
+    RewriteCond %{ENV:REWRITE_DONE} !^1$
+    # Don't rewrite real files or directories
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # Rewrite to public folder
+    RewriteRule ^(.*)$ public/$1 [E=REWRITE_DONE:1,L]
 </IfModule>
 
