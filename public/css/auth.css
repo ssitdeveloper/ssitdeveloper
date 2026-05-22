@@ -1,0 +1,270 @@
+/* ============================================
+   NEET LMS - Authentication CSS
+   Modern SaaS Login & Register
+   ============================================ */
+
+/* ============================================
+   Auth Container
+   ============================================ */
+.auth-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+.auth-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-4);
+  background-color: var(--color-white);
+}
+
+.auth-bg {
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-light) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-5);
+  color: var(--color-white);
+}
+
+.auth-bg h2 {
+  color: var(--color-white);
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--spacing-2);
+  text-align: center;
+}
+
+.auth-bg p {
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-3);
+}
+
+/* ============================================
+   Auth Form Container
+   ============================================ */
+.auth-form-container {
+  width: 100%;
+  max-width: 450px;
+}
+
+.auth-form-header {
+  margin-bottom: var(--spacing-4);
+}
+
+.auth-form-header h1 {
+  margin-bottom: var(--spacing-1);
+  font-size: var(--font-size-2xl);
+}
+
+.auth-form-header p {
+  color: var(--color-gray-600);
+  font-size: var(--font-size-base);
+}
+
+.auth-form-header a {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ============================================
+   Auth Form
+   ============================================ */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.auth-form .form-group {
+  margin-bottom: var(--spacing-2);
+}
+
+.auth-form .form-input {
+  padding: 0.875rem 1.25rem;
+  font-size: var(--font-size-base);
+  height: 48px;
+}
+
+.auth-form .btn {
+  height: 48px;
+  margin-top: var(--spacing-1);
+  font-size: var(--font-size-base);
+}
+
+.auth-form .btn-large {
+  width: 100%;
+}
+
+/* ============================================
+   Remember Me & Forgot Password
+   ============================================ */
+.auth-form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-2);
+  font-size: var(--font-size-sm);
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.form-checkbox input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+}
+
+.form-checkbox label {
+  cursor: pointer;
+  margin: 0;
+}
+
+.forgot-password {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  transition: color var(--transition-fast);
+}
+
+.forgot-password:hover {
+  color: var(--color-primary-dark);
+}
+
+/* ============================================
+   Auth Divider
+   ============================================ */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin: var(--spacing-3) 0;
+  color: var(--color-gray-400);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-gray-200);
+}
+
+/* ============================================
+   Social Auth
+   ============================================ */
+.social-auth {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-2);
+  margin: var(--spacing-3) 0;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-1);
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-white);
+  color: var(--color-gray-700);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.social-btn:hover {
+  border-color: var(--color-gray-400);
+  background-color: var(--color-gray-50);
+  transform: translateY(-2px);
+}
+
+.social-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ============================================
+   Error Message
+   ============================================ */
+.auth-error {
+  background-color: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-2);
+  margin-bottom: var(--spacing-2);
+  color: #991B1B;
+  font-size: var(--font-size-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.auth-success {
+  background-color: #ECFDF5;
+  border: 1px solid #BBFBEE;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-2);
+  margin-bottom: var(--spacing-2);
+  color: #065F46;
+  font-size: var(--font-size-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+@media (max-width: 968px) {
+  .auth-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-bg {
+    display: none;
+  }
+
+  .auth-content {
+    padding: var(--spacing-3);
+    min-height: 100vh;
+  }
+
+  .auth-form-container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-content {
+    padding: var(--spacing-2);
+  }
+
+  .auth-form-container {
+    max-width: 100%;
+  }
+
+  .auth-form-header h1 {
+    font-size: var(--font-size-xl);
+  }
+
+  .social-auth {
+    grid-template-columns: 1fr;
+  }
+}

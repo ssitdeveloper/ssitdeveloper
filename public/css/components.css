@@ -1,0 +1,627 @@
+/* ============================================
+   NEET LMS - Components CSS
+   Buttons, Cards, Forms, etc.
+   ============================================ */
+
+/* ============================================
+   Buttons
+   ============================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: 0.625rem 1.5rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  border: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Primary Button */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background-color: var(--color-gray-100);
+  color: var(--color-gray-900);
+  border: 1px solid var(--color-gray-300);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--color-gray-50);
+  border-color: var(--color-gray-400);
+}
+
+/* Outline Button */
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* Success Button */
+.btn-success {
+  background-color: var(--color-success);
+  color: var(--color-white);
+}
+
+.btn-success:hover:not(:disabled) {
+  background-color: #059669;
+}
+
+/* Danger Button */
+.btn-danger {
+  background-color: var(--color-danger);
+  color: var(--color-white);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: #DC2626;
+}
+
+/* Button Sizes */
+.btn-small {
+  padding: 0.375rem 1rem;
+  font-size: var(--font-size-sm);
+}
+
+.btn-large {
+  padding: 0.875rem 2.5rem;
+  font-size: var(--font-size-lg);
+  width: 100%;
+}
+
+/* ============================================
+   Cards
+   ============================================ */
+.card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.card-header {
+  padding: var(--spacing-2);
+  background-color: var(--color-gray-50);
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.card-header h3 {
+  margin: 0;
+}
+
+.card-body {
+  padding: var(--spacing-3);
+}
+
+.card-footer {
+  padding: var(--spacing-2);
+  background-color: var(--color-gray-50);
+  border-top: 1px solid var(--color-gray-200);
+}
+
+/* ============================================
+   Forms
+   ============================================ */
+.form-group {
+  margin-bottom: var(--spacing-2);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-700);
+}
+
+.form-label.required::after {
+  content: '*';
+  color: var(--color-danger);
+  margin-left: 0.25rem;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-base);
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-white);
+  color: var(--color-gray-900);
+  transition: all var(--transition-fast);
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-select {
+  cursor: pointer;
+}
+
+.form-input::placeholder {
+  color: var(--color-gray-400);
+}
+
+.form-input.is-invalid,
+.form-textarea.is-invalid,
+.form-select.is-invalid {
+  border-color: var(--color-danger);
+  background-color: #FFF5F5;
+}
+
+.form-input.is-invalid:focus,
+.form-textarea.is-invalid:focus,
+.form-select.is-invalid:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.form-error {
+  font-size: var(--font-size-sm);
+  color: var(--color-danger);
+  margin-top: 0.25rem;
+}
+
+.form-success {
+  font-size: var(--font-size-sm);
+  color: var(--color-success);
+  margin-top: 0.25rem;
+}
+
+/* ============================================
+   Alerts
+   ============================================ */
+.alert {
+  padding: var(--spacing-2);
+  border-radius: var(--radius-lg);
+  border-left: 4px solid;
+  margin-bottom: var(--spacing-2);
+}
+
+.alert-success {
+  background-color: #ECFDF5;
+  border-left-color: var(--color-success);
+  color: #065F46;
+}
+
+.alert-danger {
+  background-color: #FEF2F2;
+  border-left-color: var(--color-danger);
+  color: #7F1D1D;
+}
+
+.alert-warning {
+  background-color: #FFFBEB;
+  border-left-color: var(--color-warning);
+  color: #78350F;
+}
+
+.alert-info {
+  background-color: #F0F9FF;
+  border-left-color: var(--color-info);
+  color: #0C2D48;
+}
+
+/* ============================================
+   Badges
+   ============================================ */
+.badge {
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-full);
+}
+
+.badge-primary {
+  background-color: #EBF8FF;
+  color: var(--color-primary);
+}
+
+.badge-success {
+  background-color: #ECFDF5;
+  color: var(--color-success);
+}
+
+.badge-danger {
+  background-color: #FEF2F2;
+  color: var(--color-danger);
+}
+
+.badge-warning {
+  background-color: #FFFBEB;
+  color: var(--color-warning);
+}
+
+/* ============================================
+   Badges (Popular Label)
+   ============================================ */
+.badge-popular {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 0.375rem 1rem;
+  border-radius: var(--radius-full);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xs);
+}
+
+/* ============================================
+   List Styles
+   ============================================ */
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-list li {
+  padding: 0.75rem 0;
+  padding-left: 2rem;
+  position: relative;
+  border-bottom: 1px solid var(--color-gray-200);
+  font-size: var(--font-size-sm);
+}
+
+.feature-list li:last-child {
+  border-bottom: none;
+}
+
+.feature-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--color-success);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+}
+
+.table th {
+  background-color: var(--color-gray-50);
+  padding: var(--spacing-2);
+  text-align: left;
+  font-weight: var(--font-weight-semibold);
+  border-bottom: 2px solid var(--color-gray-200);
+}
+
+.table td {
+  padding: var(--spacing-2);
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.table tbody tr:hover {
+  background-color: var(--color-gray-50);
+}
+
+/* ============================================
+   Loading Spinner
+   ============================================ */
+.spinner {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 3px solid var(--color-gray-300);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   Breadcrumbs
+   ============================================ */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-2);
+}
+
+.breadcrumb-item {
+  color: var(--color-gray-600);
+}
+
+.breadcrumb-item.active {
+  color: var(--color-gray-900);
+  font-weight: var(--font-weight-semibold);
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: '/';
+  color: var(--color-gray-400);
+  margin: 0 var(--spacing-sm);
+}
+
+/* ============================================
+   Divider
+   ============================================ */
+.divider {
+  height: 1px;
+  background-color: var(--color-gray-200);
+  margin: var(--spacing-2) 0;
+}
+
+/* ============================================
+   Form Checkbox
+   ============================================ */
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  margin-bottom: var(--spacing-2);
+}
+
+.form-checkbox input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+  border: 1px solid var(--color-gray-300);
+  border-radius: 4px;
+}
+
+.form-checkbox label {
+  cursor: pointer;
+  font-size: var(--font-size-base);
+  user-select: none;
+}
+
+.form-checkbox label a {
+  color: var(--color-primary);
+}
+
+/* ============================================
+   Contact Info Box
+   ============================================ */
+.contact-info-box {
+  padding: var(--spacing-3);
+  background-color: var(--color-gray-50);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-3);
+  border: 1px solid var(--color-gray-200);
+}
+
+.contact-info-box h4 {
+  margin: 0 0 var(--spacing-1) 0;
+  color: var(--color-gray-900);
+  font-size: var(--font-size-lg);
+}
+
+.contact-info-box p {
+  margin: 0;
+  color: var(--color-gray-600);
+  font-size: var(--font-size-base);
+}
+
+.contact-info-box a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: var(--font-weight-semibold);
+}
+
+.contact-info-box a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================
+   FAQ Items
+   ============================================ */
+.faq-item {
+  margin-bottom: var(--spacing-2);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.faq-question {
+  width: 100%;
+  padding: var(--spacing-2);
+  background-color: var(--color-white);
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-900);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all var(--transition-fast);
+}
+
+.faq-question:hover {
+  background-color: var(--color-gray-50);
+  color: var(--color-primary);
+}
+
+.faq-question:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 3px rgba(44, 90, 160, 0.1);
+}
+
+.faq-toggle {
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  background-color: var(--color-gray-50);
+  transition: max-height var(--transition-base);
+}
+
+.faq-answer.active {
+  max-height: 500px;
+}
+
+.faq-answer {
+  padding: var(--spacing-2);
+  border-top: 1px solid var(--color-gray-200);
+  color: var(--color-gray-700);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+}
+
+/* ============================================
+   Price Display
+   ============================================ */
+.price-display {
+  text-align: center;
+  margin: var(--spacing-2) 0;
+}
+
+.price-display .currency {
+  font-size: var(--font-size-lg);
+  color: var(--color-primary);
+  vertical-align: super;
+}
+
+.price-display .amount {
+  font-size: 2.5rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+.price-display .period {
+  font-size: var(--font-size-base);
+  color: var(--color-gray-600);
+}
+
+/* ============================================
+   Social Auth Buttons
+   ============================================ */
+.social-auth {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-2);
+  margin: var(--spacing-2) 0;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-2);
+  border: 1px solid var(--color-gray-300);
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-700);
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.social-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background-color: #EBF8FF;
+}
+
+.social-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* ============================================
+   Auth Error / Success
+   ============================================ */
+.auth-error {
+  display: flex;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2);
+  background-color: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-radius: var(--radius-lg);
+  color: #7F1D1D;
+  margin-bottom: var(--spacing-2);
+  font-size: var(--font-size-sm);
+}
+
+.auth-error span {
+  flex-shrink: 0;
+}
+
+.auth-success {
+  display: flex;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2);
+  background-color: #ECFDF5;
+  border: 1px solid #86EFAC;
+  border-radius: var(--radius-lg);
+  color: #065F46;
+  margin-bottom: var(--spacing-2);
+  font-size: var(--font-size-sm);
+}
+
+.auth-success span {
+  flex-shrink: 0;
+}

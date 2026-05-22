@@ -1,0 +1,335 @@
+/* ============================================
+   NEET LMS - Main CSS
+   Modern SaaS Design System
+   ============================================ */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ============================================
+   CSS Variables & Design Tokens
+   ============================================ */
+:root {
+  /* Color Palette */
+  --color-primary: #2C5AA0;
+  --color-primary-dark: #1E3A5F;
+  --color-primary-light: #3B82F6;
+  --color-secondary: #10B981;
+  --color-danger: #EF4444;
+  --color-warning: #F59E0B;
+  --color-info: #0EA5E9;
+  --color-success: #10B981;
+
+  /* Neutrals */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-gray-50: #F9FAFB;
+  --color-gray-100: #F3F4F6;
+  --color-gray-200: #E5E7EB;
+  --color-gray-300: #D1D5DB;
+  --color-gray-400: #9CA3AF;
+  --color-gray-500: #6B7280;
+  --color-gray-600: #4B5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1F2937;
+  --color-gray-900: #111827;
+
+  /* Typography */
+  --font-primary: 'Sora', sans-serif;
+  --font-secondary: 'Inter', sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-1: 1rem;
+  --spacing-2: 1.5rem;
+  --spacing-3: 2rem;
+  --spacing-4: 2.5rem;
+  --spacing-5: 3rem;
+  --spacing-6: 4rem;
+  --spacing-8: 5rem;
+
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   Global Styles
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-gray-700);
+  background-color: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   Typography
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  color: var(--color-gray-900);
+}
+
+h1 {
+  font-size: var(--font-size-4xl);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: var(--font-size-3xl);
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: var(--font-size-2xl);
+}
+
+h4 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+}
+
+h5 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+h6 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+p {
+  margin-bottom: var(--spacing-1);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary-light);
+}
+
+/* ============================================
+   Container & Layout Utilities
+   ============================================ */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--spacing-2);
+  padding-right: var(--spacing-2);
+}
+
+.container-fluid {
+  width: 100%;
+  padding-left: var(--spacing-2);
+  padding-right: var(--spacing-2);
+}
+
+/* Grid System */
+.row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--spacing-2);
+  width: 100%;
+}
+
+.col-1 { grid-column: span 1; }
+.col-2 { grid-column: span 2; }
+.col-3 { grid-column: span 3; }
+.col-4 { grid-column: span 4; }
+.col-5 { grid-column: span 5; }
+.col-6 { grid-column: span 6; }
+.col-7 { grid-column: span 7; }
+.col-8 { grid-column: span 8; }
+.col-9 { grid-column: span 9; }
+.col-10 { grid-column: span 10; }
+.col-11 { grid-column: span 11; }
+.col-12 { grid-column: span 12; }
+
+/* Spacing Utilities */
+.mt-1 { margin-top: var(--spacing-1); }
+.mt-2 { margin-top: var(--spacing-2); }
+.mt-3 { margin-top: var(--spacing-3); }
+.mt-4 { margin-top: var(--spacing-4); }
+.mt-5 { margin-top: var(--spacing-5); }
+.mb-1 { margin-bottom: var(--spacing-1); }
+.mb-2 { margin-bottom: var(--spacing-2); }
+.mb-3 { margin-bottom: var(--spacing-3); }
+.mb-4 { margin-bottom: var(--spacing-4); }
+.mb-5 { margin-bottom: var(--spacing-5); }
+.my-1 { margin-top: var(--spacing-1); margin-bottom: var(--spacing-1); }
+.my-2 { margin-top: var(--spacing-2); margin-bottom: var(--spacing-2); }
+.my-3 { margin-top: var(--spacing-3); margin-bottom: var(--spacing-3); }
+.px-1 { padding-left: var(--spacing-1); padding-right: var(--spacing-1); }
+.px-2 { padding-left: var(--spacing-2); padding-right: var(--spacing-2); }
+.px-3 { padding-left: var(--spacing-3); padding-right: var(--spacing-3); }
+.py-1 { padding-top: var(--spacing-1); padding-bottom: var(--spacing-1); }
+.py-2 { padding-top: var(--spacing-2); padding-bottom: var(--spacing-2); }
+.py-3 { padding-top: var(--spacing-3); padding-bottom: var(--spacing-3); }
+.py-5 { padding-top: var(--spacing-5); padding-bottom: var(--spacing-5); }
+.p-3 { padding: var(--spacing-3); }
+.p-4 { padding: var(--spacing-4); }
+
+/* Text Utilities */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-primary { color: var(--color-primary); }
+.text-danger { color: var(--color-danger); }
+.text-success { color: var(--color-success); }
+.text-gray-600 { color: var(--color-gray-600); }
+.text-gray-700 { color: var(--color-gray-700); }
+.text-white { color: var(--color-white); }
+.text-bold { font-weight: var(--font-weight-bold); }
+.text-semibold { font-weight: var(--font-weight-semibold); }
+.text-lg { font-size: var(--font-size-lg); }
+
+/* Display Utilities */
+.d-flex { display: flex; }
+.d-grid { display: grid; }
+.d-block { display: block; }
+.d-inline-block { display: inline-block; }
+.d-none { display: none; }
+.flex-center { display: flex; justify-content: center; align-items: center; }
+.justify-between { justify-content: space-between; }
+.align-center { align-items: center; }
+.gap-2 { gap: var(--spacing-2); }
+.gap-3 { gap: var(--spacing-3); }
+
+/* Background Colors */
+.bg-primary { background-color: var(--color-primary); }
+.bg-gray-50 { background-color: var(--color-gray-50); }
+.bg-gray-100 { background-color: var(--color-gray-100); }
+.bg-white { background-color: var(--color-white); }
+
+/* ============================================
+   Animations
+   ============================================ */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn var(--transition-base);
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft var(--transition-base);
+}
+
+.animate-slideInRight {
+  animation: slideInRight var(--transition-base);
+}
+
+.animate-slideInUp {
+  animation: slideInUp var(--transition-base);
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+@media (max-width: 768px) {
+  h1 { font-size: var(--font-size-3xl); }
+  h2 { font-size: var(--font-size-2xl); }
+  h3 { font-size: var(--font-size-xl); }
+
+  .row {
+    gap: var(--spacing-1);
+  }
+
+  .col-1, .col-2, .col-3, .col-4, .col-5,
+  .col-6, .col-7, .col-8, .col-9,
+  .col-10, .col-11 {
+    grid-column: span 12;
+  }
+
+  .container {
+    padding-left: var(--spacing-1);
+    padding-right: var(--spacing-1);
+  }
+}

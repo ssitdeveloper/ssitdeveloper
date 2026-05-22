@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global animate.css + smooth CSS3 transitions */
+body {
+    opacity: 0;
+    animation: pageFadeIn 0.75s ease-out forwards;
+    animation-delay: 0.05s;
+}
+
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+button,
+a,
+input,
+select,
+textarea,
+.card,
+.btn-primary,
+.btn-secondary {
+    transition: all 0.25s ease;
+}
+
+.animate-card {
+    @apply transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-xl;
+}
+
+.animate-button {
+    @apply transition duration-300 ease-out transform hover:-translate-y-0.5 hover:shadow-lg;
+}
+
+.animated-fade-up {
+    animation: fadeUp 0.8s ease forwards;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Custom styles */
+.btn-primary {
+    @apply px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition;
+}
+
+.btn-secondary {
+    @apply px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition;
+}
+
+.card {
+    @apply bg-white rounded-lg shadow-md hover:shadow-lg transition;
+}
+
+.container-fluid {
+    @apply max-w-full px-4 sm:px-6 lg:px-8;
+}

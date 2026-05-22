@@ -1,0 +1,50 @@
+# Laravel
+/vendor
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/bootstrap/cache
+.env
+.env.backup
+.env.*.php
+.phpunit.result.cache
+.php_cs.cache
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# OS
+*.log
+.history
+
+# Composer
+composer.lock
+package-lock.json
+
+# Testing
+coverage/
+.phpunit.cache
+
+# Local development
+.env.local
+.env.*.local
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Database
+database.sqlite
+database.sqlite-journal
+
+# Payment gateway test files
+test_*.php
+verify_*.php

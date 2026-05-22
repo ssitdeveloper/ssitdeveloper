@@ -1,0 +1,13 @@
+{
+  "name": "neet-lms",
+  "version": "1.0.0",
+  "description": "NEET PG LMS Platform - Question Bank, Mock Tests, Analytics",
+  "scripts": {
+    "start": "echo 'Run: php artisan serve'"
+  },
+  "dependencies": {
+    "animate.css": "^4.1.1",
+    "axios": "^1.6.0",
+    "chart.js": "^4.4.0"
+  }
+}
