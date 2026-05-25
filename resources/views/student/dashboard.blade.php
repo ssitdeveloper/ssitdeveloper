@@ -48,6 +48,9 @@
                 <a href="{{ route('student.tests') }}" class="quick-link-btn">
                     Available Tests
                 </a>
+                <a href="{{ route('student.study-materials') }}" class="quick-link-btn">
+                    📚 Study Materials
+                </a>
                 <a href="{{ route('student.subscription') }}" class="quick-link-btn">
                     Manage Subscription
                 </a>

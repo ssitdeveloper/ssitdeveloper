@@ -153,12 +153,12 @@ class TestController extends Controller
         ]);
 
         // Get current max order
-        $maxOrder = $test->questions()->max('pivot_order') ?? 0;
+        $maxOrder = $test->questions()->max('test_questions.order_by') ?? 0;
 
         // Attach questions with order
         $attach_data = [];
         foreach ($validated['question_ids'] as $index => $question_id) {
-            $attach_data[$question_id] = ['order' => $maxOrder + $index + 1];
+            $attach_data[$question_id] = ['order_by' => $maxOrder + $index + 1];
         }
 
         $test->questions()->attach($attach_data);
@@ -198,7 +198,7 @@ class TestController extends Controller
 
         // Update order in pivot table
         foreach ($validated['order'] as $index => $question_id) {
-            $test->questions()->updateExistingPivot($question_id, ['order' => $index + 1]);
+            $test->questions()->updateExistingPivot($question_id, ['order_by' => $index + 1]);
         }
 
         return response()->json([

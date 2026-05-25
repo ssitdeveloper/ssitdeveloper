@@ -209,32 +209,50 @@
         </div>
 
         <div class="questions-container">
-            @if(count($questions) > 0)
+            @php
+                $questionCount = count($questions);
+                $questionIds = json_decode($attempt->question_ids ?? '[]', true) ?? [];
+                $questionIdsCount = count($questionIds);
+            @endphp
+
+            @if($questionCount > 0)
                 <form method="POST" action="{{ route('student.tests.submit-answer', ['slug' => $test->slug]) }}" id="testForm">
                     @csrf
                     <input type="hidden" name="attempt_id" value="{{ $attempt->id }}">
 
                     @foreach($questions as $index => $question)
                         <div class="question" id="question-{{ $question->id }}">
-                            <div class="question-number">Question {{ $index + 1 }} of {{ count($questions) }}</div>
+                            <div class="question-number">Question {{ $index + 1 }} of {{ $questionCount }}</div>
                             <div class="question-text">
                                 {{ $question->question_text ?? 'Question ' . ($index + 1) }}
                             </div>
 
-                            @if($question->options && count($question->options) > 0)
+                            @php
+                                $options = collect();
+                                if ($question->relationLoaded('options')) {
+                                    $options = $question->options ?? collect();
+                                } else {
+                                    $options = \App\Models\Option::where('question_id', $question->id)->orderBy('order_by')->get();
+                                }
+                                $optionCount = $options->count();
+                            @endphp
+
+                            @if($optionCount > 0)
                                 <div class="options">
-                                    @foreach($question->options as $option)
+                                    @foreach($options as $option)
                                         <label class="option">
                                             <input type="radio"
                                                    name="answers[{{ $question->id }}]"
                                                    value="{{ $option->id }}"
                                                    onchange="document.getElementById('question-{{ $question->id }}').classList.add('answered')">
-                                            <span class="option-text">{{ $option->option_text ?? $option->text }}</span>
+                                            <span class="option-text">{{ $option->option_text ?? 'Option ' . ($loop->iteration) }}</span>
                                         </label>
                                     @endforeach
                                 </div>
                             @else
-                                <p style="color: #94a3b8; padding: 10px;">No options available for this question</p>
+                                <p style="color: #ef4444; padding: 10px; background: #fee2e2; border-radius: 6px; margin-top: 10px;">
+                                    ⚠️ This question has no answer options. Please contact your administrator.
+                                </p>
                             @endif
                         </div>
                     @endforeach
@@ -251,15 +269,24 @@
                     </div>
                 </form>
             @else
-                <div class="no-questions">
+                <div class="no-questions" style="text-align: center; padding: 40px 20px; background: #f8fafc; border-radius: 8px;">
                     <svg style="width: 48px; height: 48px; margin: 0 auto 16px; color: #94a3b8;" data-lucide="inbox"></svg>
-                    <p style="margin-bottom: 8px; font-weight: 600;">No Questions Found</p>
-                    <p style="font-size: 14px;">Unable to load questions for this test. Please try again later.</p>
+                    <p style="margin-bottom: 8px; font-weight: 600; font-size: 18px;">No Questions Found</p>
+                    <p style="font-size: 14px; color: #64748b; margin-bottom: 10px;">Unable to load questions for this test.</p>
+                    @if($questionIdsCount === 0)
+                        <p style="font-size: 12px; color: #e11d48; background: #ffe4e6; padding: 8px; border-radius: 4px; display: inline-block;">
+                            ⚠️ No questions were assigned to this test. Contact your administrator.
+                        </p>
+                    @else
+                        <p style="font-size: 12px; color: #e11d48; background: #ffe4e6; padding: 8px; border-radius: 4px; display: inline-block;">
+                            ⚠️ Found {{ $questionIdsCount }} question(s) in attempt but couldn't load them. Contact support.
+                        </p>
+                    @endif
                 </div>
             @endif
 
-            <div class="question-count">
-                <strong>{{ count($questions) }}</strong> question(s) loaded
+            <div class="question-count" style="text-align: center; padding: 20px; color: #64748b; font-size: 12px;">
+                <strong>{{ $questionCount }}</strong> question(s) loaded • <strong>{{ $questionIdsCount }}</strong> question ID(s) in attempt
             </div>
         </div>
     </div>

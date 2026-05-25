@@ -22,6 +22,11 @@ Route::prefix('student')
         Route::get('practice/{chapterId}', [QuestionController::class, 'practiceByChapter'])->name('student.practice.chapter');
         Route::post('practice/answer', [QuestionController::class, 'submitAnswer'])->name('student.practice.answer');
 
+        // Study Materials
+        Route::get('study-materials', function() {
+            return view('student.study-materials');
+        })->name('student.study-materials');
+
         // Test mode with explicit model binding
         Route::get('tests', [TestController::class, 'index'])->name('student.tests');
         Route::get('tests/{slug}', [TestController::class, 'show'])->name('student.tests.show');

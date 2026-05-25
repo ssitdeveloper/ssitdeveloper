@@ -65,11 +65,16 @@ class TestController extends Controller
             $questions = \App\Models\Question::whereIn('id', $attempt->question_ids)
                 ->with('options')
                 ->get()
-                ->keyBy('id')
-                ->sortBy(function($q) use ($attempt) {
-                    return array_search($q->id, $attempt->question_ids);
-                })
-                ->values();
+                ->keyBy('id');
+
+            // Reorder questions to match the randomized order from the attempt
+            $reordered = [];
+            foreach ($attempt->question_ids as $id) {
+                if (isset($questions[$id])) {
+                    $reordered[$id] = $questions[$id];
+                }
+            }
+            $questions = collect($reordered)->values();
         }
 
         return view('student.test-attempt', [
