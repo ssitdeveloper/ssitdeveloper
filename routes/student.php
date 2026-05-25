@@ -35,6 +35,15 @@ Route::prefix('student')
         Route::post('tests/{slug}/submit-answer', [TestController::class, 'submitAnswer'])->name('student.tests.submit-answer');
         Route::get('tests/{slug}/result/{attemptId}', [TestController::class, 'result'])->name('student.tests.result');
 
+        // Fallback route for attempts accessed by ID alone - redirects to correct URL
+        Route::get('attempts/{attemptId}', function(Illuminate\Http\Request $request, $attemptId) {
+            $attempt = App\Models\TestAttempt::findOrFail($attemptId);
+            if ($attempt->user_id !== auth()->id()) {
+                abort(403, 'Unauthorized');
+            }
+            return redirect()->route('student.test-history.show', $attempt);
+        })->name('student.attempt.redirect');
+
         // Analytics
         Route::get('analytics', [AnalyticsController::class, 'index'])->name('student.analytics');
         Route::get('analytics/weak-topics', [AnalyticsController::class, 'weakTopics'])->name('student.analytics.weak-topics');

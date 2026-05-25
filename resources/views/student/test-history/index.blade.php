@@ -66,27 +66,32 @@
                 </thead>
                 <tbody>
                     @foreach($attempts as $attempt)
+                        @php
+                            $result = $attempt->result;
+                            $percentage = $result ? round($result->percentage, 1) : 0;
+                            $timeSpentMinutes = $attempt->started_at && $attempt->submitted_at
+                                ? round(($attempt->submitted_at->diffInSeconds($attempt->started_at)) / 60, 0)
+                                : 0;
+                            $isPassed = $percentage >= 60;
+                        @endphp
                         <tr style="border-bottom: 1px solid var(--color-gray-200);">
                             <td style="padding: var(--spacing-2); color: var(--color-gray-900); font-weight: var(--font-weight-medium);">{{ $attempt->test->title ?? 'Test' }}</td>
                             <td style="padding: var(--spacing-2); color: var(--color-gray-700); font-size: var(--font-size-sm);">{{ $attempt->created_at->format('M d, Y') }}</td>
                             <td style="padding: var(--spacing-2); text-align: center; font-weight: var(--font-weight-semibold);">
-                                <span style="display: inline-block; padding: var(--spacing-1) var(--spacing-2); background-color:
-                                    @if(($attempt->marks_obtained / $attempt->test->total_marks ?? 0) * 100 >= 60) #d4edda @else #f8d7da @endif;
-                                    color: @if(($attempt->marks_obtained / $attempt->test->total_marks ?? 0) * 100 >= 60) #155724 @else #721c24 @endif;
-                                    border-radius: var(--radius-lg);">
-                                    {{ round(($attempt->marks_obtained / ($attempt->test->total_marks ?? 1)) * 100, 1) }}%
+                                <span style="display: inline-block; padding: var(--spacing-1) var(--spacing-2); background-color: {{ $isPassed ? '#d4edda' : '#f8d7da' }}; color: {{ $isPassed ? '#155724' : '#721c24' }}; border-radius: var(--radius-lg);">
+                                    {{ $percentage }}%
                                 </span>
                             </td>
                             <td style="padding: var(--spacing-2); text-align: center;">
                                 <span style="display: inline-block; padding: var(--spacing-1) var(--spacing-2); background-color:
-                                    @if($attempt->status === 'passed') #d4edda @elseif($attempt->status === 'failed') #f8d7da @else #e2e3e5 @endif;
-                                    color: @if($attempt->status === 'passed') #155724 @elseif($attempt->status === 'failed') #721c24 @else #383d41 @endif;
+                                    @if($attempt->status === 'completed') #d4edda @else #e2e3e5 @endif;
+                                    color: @if($attempt->status === 'completed') #155724 @else #383d41 @endif;
                                     border-radius: var(--radius-lg); font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold);">
                                     {{ ucfirst($attempt->status) }}
                                 </span>
                             </td>
                             <td style="padding: var(--spacing-2); text-align: center; color: var(--color-gray-700); font-size: var(--font-size-sm);">
-                                {{ $attempt->time_spent_minutes ?? 0 }} min
+                                {{ $timeSpentMinutes }} min
                             </td>
                             <td style="padding: var(--spacing-2); text-align: center;">
                                 <a href="{{ route('student.test-history.show', $attempt) }}" style="color: var(--color-primary); text-decoration: none; font-weight: var(--font-weight-medium);">View Details</a>
@@ -97,7 +102,7 @@
             </table>
 
             @if($attempts->hasPages())
-                <div style="margin-top: var(--spacing-4); display: flex; justify-content: center;">
+                <div style="margin-top: var(--spacing-4); display: flex; justify-content: center; align-items: center; gap: var(--spacing-2); flex-wrap: wrap;">
                     {{ $attempts->links() }}
                 </div>
             @endif

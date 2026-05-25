@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
 use App\Services\SubscriptionService;
 use App\Services\PaymentService;
 use App\Services\QuestionService;
@@ -32,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        //
+        // Set pagination view to custom bootstrap-5
+        Paginator::useBootstrapFive();
     }
 }

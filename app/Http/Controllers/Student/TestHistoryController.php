@@ -11,7 +11,7 @@ class TestHistoryController extends Controller
     public function index(Request $request)
     {
         $query = auth()->user()->testAttempts()
-            ->with('test', 'answers')
+            ->with('test', 'answers', 'result')
             ->latest();
 
         // Filter by status
