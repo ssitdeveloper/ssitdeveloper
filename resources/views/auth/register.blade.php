@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Create account on NEET LMS - Medical entrance exam preparation platform">
     <title>Sign Up - NEET LMS</title>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.1"></script>
 
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components.css') }}">
