@@ -45,15 +45,24 @@ class TestHistoryController extends Controller
 
     public function getStats()
     {
-        $attempts = auth()->user()->testAttempts;
+        $attempts = auth()->user()->testAttempts()->with('result')->get();
+
+        // Calculate scores from related results
+        $scores = $attempts->map(function($attempt) {
+            return $attempt->result ? (float)$attempt->result->percentage : 0;
+        });
+
+        $passedCount = $attempts->filter(function($attempt) {
+            return $attempt->result && (float)$attempt->result->percentage >= 60;
+        })->count();
 
         return [
             'total_tests' => $attempts->count(),
-            'passed' => $attempts->where('status', 'passed')->count(),
-            'failed' => $attempts->where('status', 'failed')->count(),
-            'avg_score' => $attempts->avg('marks_obtained') ?? 0,
-            'highest_score' => $attempts->max('marks_obtained') ?? 0,
-            'lowest_score' => $attempts->min('marks_obtained') ?? 0,
+            'passed' => $passedCount,
+            'failed' => $attempts->count() - $passedCount,
+            'avg_score' => $scores->count() > 0 ? round($scores->average(), 1) : 0,
+            'highest_score' => $scores->count() > 0 ? $scores->max() : 0,
+            'lowest_score' => $scores->count() > 0 ? $scores->min() : 0,
         ];
     }
 }
