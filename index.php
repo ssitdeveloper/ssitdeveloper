@@ -43,5 +43,8 @@ if (preg_match('~/(css|js|images|fonts)/(.+)$~', $request_uri, $matches)) {
         readfile($file);
         exit;
     }
+}
+
+// Continue with Laravel
 require_once __DIR__ . '/public/index.php';
 

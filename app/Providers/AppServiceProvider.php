@@ -32,12 +32,6 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        // Override asset URL generation to include /public/ in the path
-        if (!app()->runningInConsole()) {
-            // Extend the asset() helper to serve from /public/
-            $this->app['url']->macro('assetFromPublic', function ($path = null) {
-                return asset('public/' . $path);
-            });
-        }
+        //
     }
 }
