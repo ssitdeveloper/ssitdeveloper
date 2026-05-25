@@ -1,20 +1,8 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /medical/
 
-    # Don't rewrite if it's a real file
-    RewriteCond %{REQUEST_FILENAME} -f
-    RewriteRule ^ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
 
-    # Don't rewrite if it's a real directory
-    RewriteCond %{REQUEST_FILENAME} -d
-    RewriteRule ^ - [L]
-
-    # Don't rewrite if path already contains public
-    RewriteCond %{REQUEST_URI} /public/
-    RewriteRule ^ - [L]
-
-    # Rewrite everything else to public folder
-    RewriteRule ^(.*)$ public/$1 [L]
+    RewriteRule ^ index.php [L]
 </IfModule>
-
