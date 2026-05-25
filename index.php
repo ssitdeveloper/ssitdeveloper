@@ -13,12 +13,12 @@
 
 // Serve static assets from public folder
 $request_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$base_path = '/medical/';
-$relative_path = substr($request_uri, strlen($base_path));
 
-// Check if it's a static asset request
-if (preg_match('~^(css|js|images|fonts)/~', $relative_path)) {
+// Check if request matches asset patterns (css, js, images, fonts)
+if (preg_match('~/(css|js|images|fonts)/(.+)$~', $request_uri, $matches)) {
+    $relative_path = $matches[1] . '/' . $matches[2];
     $file = __DIR__ . '/public/' . $relative_path;
+
     if (file_exists($file) && is_file($file)) {
         // Determine MIME type
         $mime_types = [
