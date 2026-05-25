@@ -24,7 +24,31 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // Check for subscriptions expiring in 3 days and attempt auto-renewal
+        $schedule->job(new \App\Jobs\RenewExpiredSubscriptions())
+            ->daily()
+            ->at('00:00') // Run at midnight
+            ->onOneServer()
+            ->withoutOverlapping();
+
+        // Check and mark expired subscriptions
+        $schedule->call(function () {
+            \App\Models\Subscription::where('status', \App\Enums\SubscriptionStatus::ACTIVE->value)
+                ->whereDate('expires_at', '<=', now()->toDateString())
+                ->update(['status' => \App\Enums\SubscriptionStatus::EXPIRED->value]);
+        })->daily()->at('01:00');
+
+        // Send subscription expiry reminders (7 days before expiry)
+        $schedule->call(function () {
+            $subscriptions = \App\Models\Subscription::where('status', \App\Enums\SubscriptionStatus::ACTIVE->value)
+                ->whereDate('expires_at', '=', now()->addDays(7)->toDateString())
+                ->get();
+
+            foreach ($subscriptions as $subscription) {
+                \Illuminate\Support\Facades\Mail::to($subscription->user->email)
+                    ->send(new \App\Mail\SubscriptionExpiringMail($subscription));
+            }
+        })->daily()->at('02:00');
     }
 
     /**

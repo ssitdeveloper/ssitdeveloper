@@ -1,18 +1,8 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Skip rewrite if file actually exists
-    RewriteCond %{REQUEST_FILENAME} -f
-    RewriteRule ^ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
 
-    # Skip rewrite if directory actually exists
-    RewriteCond %{REQUEST_FILENAME} -d
-    RewriteRule ^ - [L]
-
-    # Serve CSS/JS/Images/Fonts from public folder
-    RewriteCond %{REQUEST_URI} ^/(css|js|images|fonts)/ [NC]
-    RewriteRule ^(.*)$ public/$1 [L]
-
-    # Route everything else to public/index.php
-    RewriteRule ^ public/index.php [L]
+    RewriteRule ^ index.php [L]
 </IfModule>
